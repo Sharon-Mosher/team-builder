@@ -41,13 +41,14 @@ const Form = props => {
         value={newForm.email}
         placeholder="Email"
       />
-      <input
-        onChange={handleChange}
-        type="text"
-        name="role"
-        value={newForm.role}
-        placeholder="Role"
-      />
+      <select id="role" name="role">
+        <option value="User Interface">User Interface</option>
+        <option value="Front End I">Front End I</option>
+        <option value="Front End II">Front End II</option>
+        <option value="Backend">Backend</option>
+
+      </select>
+  
       <button type="submit">Add Member</button>
     </form>
   );
