@@ -1,57 +1,59 @@
-import React from 'react';
+import React, { useState } from "react";
 
-const Form = props => {
-  const defaultState = {
-    name: "",
-    email: "",
-    role: ""
-  };
+const Form = (props) => {
+  console.log("form: ", Form);
 
-  const [newForm, setNewForm] = React.useState(defaultState);
+  // const defaultState = {
+  //     name: "",
+  //     email: "",
+  //     role: ""
+  //     };
+  const [form, setForm] = useState({ name: "", email: "", role: "" });
 
-  const handleChange = event => {
-    // console.log(event.target.name);
-    console.log(event.target.value);
-    setNewForm({
-      ...newForm,
-      [event.target.name]: event.target.value
+  const handleChange = (event) => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = event => {
+  const submitForm = (event) => {
     event.preventDefault();
-    props.setMembers([...props.members, newForm]);
-    setNewForm(defaultState);
+    props.addNewTeamMember(form);
+    setForm({ name: "", email: "", role: "" });
     console.log("form submitted!");
   };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
+      <label htmlFor="name">Name</label>
       <input
-        onChange={handleChange}
+        id="name"
         type="text"
+        placeholder="Name"
+        onChange={handleChange}
+        value={form.name}
         name="name"
-        value={newForm.name}
-        placeholder="name"
       />
+      <label htmlFor="email">Email</label>
       <input
-        onChange={handleChange}
+        id="email"
         type="text"
-        name="email"
-        value={newForm.email}
         placeholder="Email"
+        onChange={handleChange}
+        value={form.email}
+        name="email"
       />
-      <select id="role" name="role">
-        <option value="User Interface">User Interface</option>
-        <option value="Front End I">Front End I</option>
-        <option value="Front End II">Front End II</option>
-        <option value="Backend">Backend</option>
-
-      </select>
-  
+      <label htmlFor="role">Role</label>
+      <input
+        id="role"
+        type="text"
+        placeholder="Role"
+        onChange={handleChange}
+        value={form.role}
+        name="role"
+      />
       <button type="submit">Add Member</button>
     </form>
   );
 };
-
-export default Form; 
+export default Form;
